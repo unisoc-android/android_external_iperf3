@@ -3532,7 +3532,9 @@ iperf_new_stream(struct iperf_test *test, int s, int sender)
             tempdir = getenv("TMP");
         }
         if (tempdir == 0){
-            tempdir = "/tmp";
+	    /* 1073221:There is no tmp in android Q, so redirect to data. */
+            /* *tempdir = "/tmp"; */
+            tempdir = "/data/local/tmp";
         }
         snprintf(template, sizeof(template) / sizeof(char), "%s/iperf3.XXXXXX", tempdir);
     }
